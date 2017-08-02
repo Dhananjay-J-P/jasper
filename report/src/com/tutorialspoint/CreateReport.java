@@ -19,9 +19,9 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 public class CreateReport {
 
    public static void main(String[] args) {
-      String masterReportFileName = "C:/jas/report/resource/jrxml/jasperaddress_report_template.jrxml";
-      String subReportFileName = "C:/jas/report/resource/jrxml/address_report_template.jrxml";
-      String destFileName = "C:/jas/report/target/jasper/jasper_report_template.JRprint";
+      String masterReportFileName = "C:/GIT/PUBLIC/jasper/report/resource/jrxml/jasperaddress_report_template.jrxml";
+      String subReportFileName = "C:/GIT/PUBLIC/jasper/report/resource/jrxml/address_report_template.jrxml";
+      String destFileName = "C:/GIT/PUBLIC/jasper/report/target/jasper/jasper_report_template.JRprint";
 			 
       DataBeanList DataBeanList = new DataBeanList();
       ArrayList<DataBean> dataList = DataBeanList.getDataBeanList();
