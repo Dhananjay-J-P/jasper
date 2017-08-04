@@ -80,7 +80,9 @@ public class TestPrint {
 		         Map<String, Object> parameters = new HashMap<String, Object>();
 		         parameters.put("saleItemList", itemJasper);
 		         parameters.put("tenderList", tenderJasper);
-		         parameters.put("grandTotal", 10000.00);
+		         parameters.put("grandItemTotal",order.getOrderTotal());
+		         parameters.put("grandTenderTotal",order.getOrderTotal() - order.getOrderTenderTotal());
+		         parameters.put("balanceDue", order.getOrderTenderTotal());
 		         parameters.put("ERName", "Order Summary");
 		         parameters.put("customerId",order.getCustomer().getCustomerId() );
 		         parameters.put("cname",order.getCustomer().getName()+" "+order.getCustomer().getLname());

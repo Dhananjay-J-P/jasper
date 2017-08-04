@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="order" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="904"/>
 	<parameter name="ERName" class="java.lang.String"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["./resource/jasper/"]]></defaultValueExpression>
@@ -11,6 +11,9 @@
 		<parameterDescription><![CDATA[The letterhead image]]></parameterDescription>
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="grandItemTotal" class="java.lang.Double"/>
+	<parameter name="grandTenderTotal" class="java.lang.Double"/>
+	<parameter name="balanceDue" class="java.lang.Double"/>
 	<parameter name="customerId" class="java.lang.String"/>
 	<parameter name="orderStatus" class="java.lang.String"/>
 	<parameter name="pstatus" class="java.lang.String"/>
@@ -20,14 +23,14 @@
 	<field name="saleItemList" class="java.util.List"/>
 	<field name="tenderList" class="java.util.List"/>
 	<background>
-		 <band height="800" splitType="Stretch">
-		<rectangle radius="0">
-				<reportElement key="rectangle-1" mode="Opaque" x="0" y="0" width="555" height="600" forecolor="#000000" />
-				  <graphicElement>
-                <pen lineWidth="0.5" lineStyle="Solid"/>
-            </graphicElement>
+		<band height="800" splitType="Stretch">
+			<rectangle radius="0">
+				<reportElement key="rectangle-1" mode="Opaque" x="0" y="0" width="555" height="800" forecolor="#000000"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
 			</rectangle>
-			</band>
+		</band>
 	</background>
 	<title>
 		<band height="100" splitType="Stretch">
@@ -88,21 +91,29 @@
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[org.apache.commons.lang3.time.DateFormatUtils.format($P{orderDate}, "yyyy-MM-dd hh.mm a")]]></textFieldExpression>
+				<textFieldExpression class="java.util.String"><![CDATA[org.apache.commons.lang3.time.DateFormatUtils.format($P{orderDate}, "yyyy-MM-dd hh.mm a")]]></textFieldExpression>
 			</textField>
 			<subreport>
 				<reportElement positionType="Float" x="0" y="87" width="175" height="20" isRemoveLineWhenBlank="true" backcolor="#99CCFF"/>
+				<subreportParameter name="grandItemTotal">
+					<subreportParameterExpression><![CDATA[$P{grandItemTotal}]]></subreportParameterExpression>
+				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
                   ($F{saleItemList})]]></dataSourceExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "itemlist.jasper"]]></subreportExpression>
 			</subreport>
-			<!--<subreport>
-				<reportElement positionType="Float" x="299" y="87" width="175" height="20" isRemoveLineWhenBlank="true" backcolor="#99CCFF"/>
+			<subreport>
+				<reportElement positionType="Float" x="1" y="119" width="175" height="20" isRemoveLineWhenBlank="true" backcolor="#99CCFF"/>
+				<subreportParameter name="grandTenderTotal">
+					<subreportParameterExpression><![CDATA[$P{grandTenderTotal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="balanceDue">
+					<subreportParameterExpression><![CDATA[$P{balanceDue}]]></subreportParameterExpression>
+				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
                   ($F{tenderList})]]></dataSourceExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "tender.jasper"]]></subreportExpression>
-			</subreport> -->
-		
+			</subreport>
 			<staticText>
 				<reportElement x="326" y="0" width="100" height="20"/>
 				<textElement>

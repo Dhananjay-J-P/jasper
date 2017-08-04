@@ -89,7 +89,7 @@ public class ERPSaleItem {
 	 * @return the total
 	 */
 	public double getTotal() {
-		return total;
+		return item.getCost()*quantity;
 	}
 
 	/**
