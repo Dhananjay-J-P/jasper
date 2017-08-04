@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="order" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="904"/>
+	<property name="ireport.y" value="7"/>
 	<parameter name="ERName" class="java.lang.String"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["./resource/jasper/"]]></defaultValueExpression>
@@ -25,7 +25,7 @@
 	<background>
 		<band height="800" splitType="Stretch">
 			<rectangle radius="0">
-				<reportElement key="rectangle-1" mode="Opaque" x="0" y="0" width="555" height="800" forecolor="#000000"/>
+				<reportElement key="rectangle-1" mode="Opaque" x="0" y="0" width="510" height="800" forecolor="#000000"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineStyle="Solid"/>
 				</graphicElement>
@@ -49,9 +49,9 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="34" splitType="Stretch">
+		<band height="28" splitType="Stretch">
 			<rectangle radius="0">
-				<reportElement key="rectangle-1" mode="Opaque" x="1" y="1" width="554" height="21" forecolor="#000000" backcolor="#CCCCCC"/>
+				<reportElement key="rectangle-1" mode="Opaque" x="1" y="1" width="510" height="21" forecolor="#000000" backcolor="#CCCCCC"/>
 				<graphicElement fill="Solid"/>
 			</rectangle>
 			<staticText>
@@ -94,16 +94,22 @@
 				<textFieldExpression class="java.util.String"><![CDATA[org.apache.commons.lang3.time.DateFormatUtils.format($P{orderDate}, "yyyy-MM-dd hh.mm a")]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="87" width="175" height="20" isRemoveLineWhenBlank="true" backcolor="#99CCFF"/>
+				<reportElement positionType="Float" x="1" y="87" width="285" height="20" isRemoveLineWhenBlank="true" backcolor="#99CCFF"/>
 				<subreportParameter name="grandItemTotal">
 					<subreportParameterExpression><![CDATA[$P{grandItemTotal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="grandTenderTotal">
+					<subreportParameterExpression><![CDATA[$P{grandTenderTotal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="balanceDue">
+					<subreportParameterExpression><![CDATA[$P{balanceDue}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
                   ($F{saleItemList})]]></dataSourceExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "itemlist.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="1" y="119" width="175" height="20" isRemoveLineWhenBlank="true" backcolor="#99CCFF"/>
+				<reportElement positionType="Float" x="1" y="87" width="160" height="20" isRemoveLineWhenBlank="true" backcolor="#99CCFF"/>
 				<subreportParameter name="grandTenderTotal">
 					<subreportParameterExpression><![CDATA[$P{grandTenderTotal}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -115,21 +121,21 @@
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "tender.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="326" y="0" width="100" height="20"/>
+				<reportElement x="300" y="0" width="100" height="20"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Customer Id:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="326" y="20" width="111" height="20"/>
+				<reportElement x="300" y="20" width="111" height="20"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Customer Name:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="326" y="40" width="100" height="20"/>
+				<reportElement x="300" y="40" width="100" height="20"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -150,21 +156,21 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{orderStatus}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="426" y="0" width="112" height="20"/>
+				<reportElement x="400" y="0" width="112" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{customerId}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="426" y="20" width="112" height="20"/>
+				<reportElement x="400" y="20" width="112" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{cname}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="426" y="40" width="112" height="20"/>
+				<reportElement x="400" y="40" width="112" height="20"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -172,4 +178,16 @@
 			</textField>
 		</band>
 	</detail>
+	<lastPageFooter>
+		<band height="30">
+			<staticText>
+				<reportElement x="41" y="10" width="155" height="20"/>
+				<textElement/>
+				<text><![CDATA[Payment accepted by ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="21" y="0" width="195" height="1"/>
+			</line>
+		</band>
+	</lastPageFooter>
 </jasperReport>

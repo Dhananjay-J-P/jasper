@@ -44,7 +44,7 @@ public class TestPrint {
 		ERPPart part = new ERPPart("Par1", 100.00, null);
 		part.setPartId(120);
 
-		ERPProduct product = new ERPProduct("Prod1", "", 200.00, null);
+		ERPProduct product = new ERPProduct("Prod1", "", 20000.00, null);
 		product.setId("P200");
 		
 		com.erp.product.ERPPartQuantityMap map = new ERPPartQuantityMap(part, 2);
@@ -54,7 +54,7 @@ public class TestPrint {
 		ERPPayment payment = new ERPPayment("Cash", 100, new Date());
 
 		ERPPayment payment2 = new ERPPayment("Cheque", 1200, new Date());
-		payment2.setChequeId("122222");
+		payment2.setChequeId("122232");
 		ERPSaleItem item = new ERPSaleItem(product, 10, 1000.00);
 		ERPSaleItem item2 = new ERPSaleItem(product, 11, 1000.00);
 
@@ -66,8 +66,14 @@ public class TestPrint {
 		order.getSaleItemList().add(item);
 		order.getSaleItemList().add(item2);
 		order.getSaleItemList().add(item);
+		order.getSaleItemList().add(item);
+		order.getSaleItemList().add(item2);
+		order.getSaleItemList().add(item);
+		order.getSaleItemList().add(item2);
+		order.getSaleItemList().add(item);
 		
-		order.getTenderList().add(payment);
+		
+		/*order.getTenderList().add(payment);*/
 		order.getTenderList().add(payment2);
 		order.setOrderDate(new Date());
 		order.setOrderStatus(ORDER_STATUS.STATUS_PLACED.value());
@@ -81,8 +87,8 @@ public class TestPrint {
 		         parameters.put("saleItemList", itemJasper);
 		         parameters.put("tenderList", tenderJasper);
 		         parameters.put("grandItemTotal",order.getOrderTotal());
-		         parameters.put("grandTenderTotal",order.getOrderTotal() - order.getOrderTenderTotal());
-		         parameters.put("balanceDue", order.getOrderTenderTotal());
+		         parameters.put("grandTenderTotal",order.getOrderTenderTotal() );
+		         parameters.put("balanceDue", order.getOrderTotal() - order.getOrderTenderTotal());
 		         parameters.put("ERName", "Order Summary");
 		         parameters.put("customerId",order.getCustomer().getCustomerId() );
 		         parameters.put("cname",order.getCustomer().getName()+" "+order.getCustomer().getLname());
