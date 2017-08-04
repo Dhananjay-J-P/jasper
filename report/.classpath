@@ -6,8 +6,10 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="jrxml/" kind="src" path="resource"/>
+	<classpathentry excluding="jrxml/|jasper/|output/" kind="src" path="resource"/>
 	<classpathentry kind="src" path="resource/jrxml"/>
+	<classpathentry kind="src" path="resource/jasper"/>
+	<classpathentry kind="src" path="resource/output"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>

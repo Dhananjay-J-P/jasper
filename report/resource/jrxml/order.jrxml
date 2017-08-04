@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="order" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ERName" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["./resource/jasper/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="Object" isForPrompting="false">
+		<parameterDescription><![CDATA[The letterhead image]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="customerId" class="java.lang.String"/>
+	<parameter name="orderStatus" class="java.lang.String"/>
+	<parameter name="pstatus" class="java.lang.String"/>
+	<parameter name="cname" class="java.lang.String"/>
+	<parameter name="orderId" class="java.lang.String"/>
+	<parameter name="orderDate" class="java.util.Date"/>
+	<field name="saleItemList" class="java.util.List"/>
+	<field name="tenderList" class="java.util.List"/>
+	<background>
+		 <band height="800" splitType="Stretch">
+		<rectangle radius="0">
+				<reportElement key="rectangle-1" mode="Opaque" x="0" y="0" width="555" height="600" forecolor="#000000" />
+				  <graphicElement>
+                <pen lineWidth="0.5" lineStyle="Solid"/>
+            </graphicElement>
+			</rectangle>
+			</band>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<image>
+				<reportElement x="21" y="10" width="139" height="80"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true" bookmarkLevel="1">
+				<reportElement x="133" y="0" width="259" height="30"/>
+				<textElement>
+					<font size="22"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ERName}]]></textFieldExpression>
+				<anchorNameExpression><![CDATA["Title"]]></anchorNameExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="34" splitType="Stretch">
+			<rectangle radius="0">
+				<reportElement key="rectangle-1" mode="Opaque" x="1" y="1" width="554" height="21" forecolor="#000000" backcolor="#CCCCCC"/>
+				<graphicElement fill="Solid"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="226" y="3" width="100" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order Invoice]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="240" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order Id:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order Date:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="104" y="0" width="112" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{orderId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="20" width="120" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[org.apache.commons.lang3.time.DateFormatUtils.format($P{orderDate}, "yyyy-MM-dd hh.mm a")]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="87" width="175" height="20" isRemoveLineWhenBlank="true" backcolor="#99CCFF"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+                  ($F{saleItemList})]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "itemlist.jasper"]]></subreportExpression>
+			</subreport>
+			<!--<subreport>
+				<reportElement positionType="Float" x="299" y="87" width="175" height="20" isRemoveLineWhenBlank="true" backcolor="#99CCFF"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+                  ($F{tenderList})]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "tender.jasper"]]></subreportExpression>
+			</subreport> -->
+		
+			<staticText>
+				<reportElement x="326" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Id:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="20" width="111" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="40" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Payment Status:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="100" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order Status:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="104" y="40" width="112" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{orderStatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="426" y="0" width="112" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{customerId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="426" y="20" width="112" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{cname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="426" y="40" width="112" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{pstatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
