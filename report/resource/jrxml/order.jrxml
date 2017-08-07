@@ -2,10 +2,10 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="order" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="7"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="ERName" class="java.lang.String"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["./resource/jasper/"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["./jasper/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="logo" class="Object" isForPrompting="false">
 		<parameterDescription><![CDATA[The letterhead image]]></parameterDescription>
@@ -20,6 +20,9 @@
 	<parameter name="cname" class="java.lang.String"/>
 	<parameter name="orderId" class="java.lang.String"/>
 	<parameter name="orderDate" class="java.util.Date"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="contact" class="java.lang.String"/>
+	<parameter name="dueAction" class="java.lang.String"/>
 	<field name="saleItemList" class="java.util.List"/>
 	<field name="tenderList" class="java.util.List"/>
 	<background>
@@ -35,17 +38,41 @@
 	<title>
 		<band height="100" splitType="Stretch">
 			<image>
-				<reportElement x="21" y="10" width="139" height="80"/>
+				<reportElement x="21" y="10" width="140" height="80"/>
 				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<textField isBlankWhenNull="true" bookmarkLevel="1">
-				<reportElement x="133" y="0" width="259" height="30"/>
+				<reportElement x="141" y="0" width="259" height="30"/>
 				<textElement>
 					<font size="22"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{ERName}]]></textFieldExpression>
 				<anchorNameExpression><![CDATA["Title"]]></anchorNameExpression>
 			</textField>
+			<line>
+				<reportElement x="133" y="10" width="1" height="80"/>
+			</line>
+			<textField>
+				<reportElement x="141" y="30" width="259" height="35"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="191" y="70" width="100" height="20"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{contact}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="141" y="70" width="50" height="20"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Contact:]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
@@ -103,6 +130,9 @@
 				</subreportParameter>
 				<subreportParameter name="balanceDue">
 					<subreportParameterExpression><![CDATA[$P{balanceDue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dueAction">
+					<subreportParameterExpression><![CDATA[$P{dueAction}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
                   ($F{saleItemList})]]></dataSourceExpression>

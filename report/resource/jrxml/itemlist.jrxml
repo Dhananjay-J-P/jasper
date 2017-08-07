@@ -6,6 +6,7 @@
 	<parameter name="grandItemTotal" class="java.lang.Double"/>
 	<parameter name="grandTenderTotal" class="java.lang.Double"/>
 	<parameter name="balanceDue" class="java.lang.Double"/>
+	<parameter name="dueAction" class="java.lang.String"/>
 	<field name="item" class="com.erp.product.ERPProduct"/>
 	<field name="quantity" class="java.lang.Integer"/>
 	<background>
@@ -125,13 +126,6 @@
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{grandTenderTotal}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="110" y="43" width="80" height="20"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Balance Due:]]></text>
-			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="200" y="43" width="70" height="19"/>
 				<textElement>
@@ -139,6 +133,13 @@
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{balanceDue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="43" width="80" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{dueAction}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>
